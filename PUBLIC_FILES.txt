@@ -1,0 +1,14 @@
+README.md
+proof.tex
+proof.pdf
+REFERENCES.md
+REPRODUCIBILITY.md
+RIGHTS.md
+requirements.txt
+verify.py
+verify_low_degree.py
+data/archived_168_records.json
+data/verification_report.json
+check_package.py
+PUBLIC_FILES.txt
+SHA256SUMS.json

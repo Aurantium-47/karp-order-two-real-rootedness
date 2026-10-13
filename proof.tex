@@ -1,0 +1,366 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=25mm]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\emergencystretch}{2em}
+\title{Real-rootedness of Karp's order-two\\rising-factorial transform}
+\author{Aurantium}
+\date{13 October 2026}
+\hypersetup{pdftitle={Real-rootedness of Karp's order-two rising-factorial transform},pdfauthor={Aurantium},pdfsubject={Positive full-support inputs, residual real roots and spacing}}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every integer \(n\geq3\), positive scale \(c\), and positive real
+parameters \(a_1,\ldots,a_n\), with repetitions allowed, we prove that
+Karp's order-two rising-factorial transform of the coefficients of
+\(c\prod_{i=1}^n(1+a_i t)\) has degree \(n-2\) and only strictly negative
+real zeros. A coefficient-convolution argument and reciprocal pairing
+produce a symmetric Bernstein polynomial. An exact beta-moment identity
+then separates an explicit rising-factorial factor from a residual
+polynomial. A difference recurrence proves that the residual has simple
+negative roots with consecutive gaps at least one. The full transform may
+have repeated roots where its factors overlap. The proof includes a
+positive symmetric-weight extension and all degree-deficient residual
+cases; zero-supported inputs and higher-order Toeplitz determinants are
+not included.
+\end{abstract}
+\section*{Statement and scope}
+
+For every integer \(n\geq3\), let \(c>0\) and \(a_1,\ldots,a_n>0\) be real numbers, with repetitions allowed, and define \[
+ F(t)=\sum_{k=0}^n f_k t^k=c\prod_{i=1}^n(1+a_i t).
+\] For an integer \(k\geq0\), put \((x)_0=1\) and \[
+ (x)_k=x(x+1)\cdots(x+k-1)\quad(k\geq1).
+\] The target is that the polynomial \[
+ P_n(x)=\sum_{k=0}^n\binom nk f_kf_{n-k}
+ \big[(x)_k(x)_{n-k}-(x+1)_k(x-1)_{n-k}\big]
+ \tag{1}
+\] has only strictly negative real zeros. Zeros are considered in \(\mathbb C\) and counted with multiplicity when degree or root counts are discussed.
+
+This is the positive, degree-\(n\), full-support case of Karp's Conjecture 3 in \cite[p.~2]{Karp2012}; equation (7) on page 4 gives \(P_n(x)=Q_n^{1,1}(x-1)\). The same order-two transform is Conjecture 1 in Karp's contribution to \cite[p.~3]{Kryvonos2023}. Karp's Theorem 1 proves degree and coefficient positivity under its stated strict log-concavity hypothesis; coefficient positivity alone does not establish real-rootedness. This note concerns strictly positive full-support inputs. Zero boundary coefficients, lower degree than the declared \(n\), arbitrary shift parameters, and higher-order Toeplitz determinants are outside its scope. No claim of publication priority is made.
+
+\begin{theorem}\label{thm:main} The target holds for every allowed $n,c,a_1,\ldots,a_n$. More precisely, set
+\[
+ m=\lfloor n/2\rfloor,\qquad \varepsilon=n-2m\in\{0,1\},\qquad r=m-1,
+\]
+\[
+ D_n(x)=(x+1)_{m-1+\varepsilon}
+       =\prod_{j=1}^{\lfloor(n-1)/2\rfloor}(x+j).
+\]
+Then
+\[
+ P_n(x)=2^nD_n(x)R_n(x),\qquad \deg R_n=r. \tag{2}
+\]
+The polynomial $R_n$ has positive leading coefficient and only simple, strictly negative real zeros. If it has at least two zeros, the distance between each consecutive pair is at least one. Its zeros lie in
+\[
+ [\tfrac12-m,0).
+\]
+Consequently $P_n$ is nonzero, has degree $n-2$, and all of its zeros are strictly negative and real. Coincidences between a zero of $D_n$ and a zero of $R_n$ are not excluded, so simplicity is asserted only for the residual factor.
+\end{theorem}
+
+The proof is uniform in \(n\) and all positive real input parameters. The finite records discussed below are supplementary, not premises of the proof. Here \(r=m-1\) denotes the residual degree, not the order of a Toeplitz determinant.
+
+\section{Coefficient convolution}\label{sec:convolution}
+\begin{lemma}
+Let
+\[
+ A(t)=A_0\prod_{i=1}^d(1+\alpha_i t)=\sum_i A_i t^i,
+ \qquad
+ B(t)=B_0\prod_{j=1}^e(1+\beta_j t)=\sum_j B_j t^j,
+\]
+where $A_0,B_0,\alpha_i,\beta_j>0$. Coefficients outside the displayed degree ranges are zero. For $0\leq N\leq d+e$, define
+\[
+ C_N(z)=\sum_k A_kB_{N-k}z^k.
+\]
+Every nonzero root of $C_N$ is strictly negative and real; zero roots may occur when its constant coefficient vanishes. In particular, if its constant coefficient is positive, all of its roots are strictly negative.
+\end{lemma}
+
+\begin{proof} Fix $\operatorname{Im}z>0$ and consider the auxiliary polynomial
+\[
+ h_z(s)=\prod_{i=1}^d(s+\alpha_i z)\prod_{j=1}^e(s+\beta_j).
+\]
+Its roots are either strictly below the real axis or strictly negative real numbers. Their convex hull does not contain $0$: a convex combination with imaginary part zero can use only the real roots, and such a combination is strictly negative.
+
+The zeros of every derivative of a nonconstant polynomial lie in the convex hull of its zeros. For completeness, this usual Gauss--Lucas fact follows by separating a point $s_0$ outside that convex hull from the hull by a line. After rotation all numbers $s_0-\zeta_j$, where $\zeta_j$ are the roots, have positive real part. The reciprocals have positive real part after the opposite rotation, so
+\[
+ h'(s_0)/h(s_0)=\sum_j\frac1{s_0-\zeta_j}\ne0.
+\]
+Iterating this fact confines every derivative's zeros to the original hull. Therefore
+\[
+ h_z^{(d+e-N)}(0)\ne0.
+\]
+On the other hand, if $e_N$ denotes the elementary symmetric polynomial of degree $N$,
+\[
+ \frac{C_N(z)}{A_0B_0}
+ =e_N(\alpha_1z,\ldots,\alpha_dz,\beta_1,\ldots,\beta_e)
+ =\frac{h_z^{(d+e-N)}(0)}{(d+e-N)!}.
+\]
+Thus $C_N$ has no root in the upper half-plane. Its coefficients are real, so it has no nonreal root at all. Its nonnegative coefficients exclude positive real roots. A positive constant coefficient additionally excludes zero. This proves the lemma, including repeated input roots. \end{proof}
+
+Apply the lemma first with \(A=B=F\) and \(N=n\). It shows that \[
+ W(z)=\sum_{k=0}^n w_kz^k,\qquad w_k=f_kf_{n-k}, \tag{3}
+\] is a degree-\(n\) polynomial with positive coefficients and only strictly negative real roots. Apply it a second time with \(A=W\), \(B(t)=(1+t)^n\), and \(N=n\). We obtain the same conclusions for \[
+ V(z)=\sum_{k=0}^n\binom nk w_kz^k. \tag{4}
+\] All hypotheses hold at the second application because \(W\) has positive constant term and its strictly negative roots give a factorization of the required form.
+
+\section{Reciprocal roots and the Bernstein polynomial}\label{sec:bernstein}
+
+Since \(w_k=w_{n-k}\), the polynomial \(V\) is reciprocal: \[
+ z^nV(1/z)=V(z).
+\] Its negative roots can therefore be paired by reciprocation. There are positive numbers \(\rho_1,\ldots,\rho_m\) such that \[
+ V(z)=w_0(1+z)^\varepsilon
+       \prod_{i=1}^m(1+\rho_i z)(1+\rho_i^{-1}z). \tag{5}
+\] Pairs with \(\rho_i=1\) are permitted. Indeed, the only negative root fixed by reciprocation is \(-1\); its multiplicity has parity \(n\), which accounts for the displayed factor \((1+z)^\varepsilon\).
+
+Define the symmetric Bernstein polynomial \[
+ \mathcal B(t)=\sum_{k=0}^n\binom nk w_kt^k(1-t)^{n-k}
+             =(1-t)^nV\!\left(\frac{t}{1-t}\right).
+\] The last expression is interpreted as its polynomial continuation at \(t=1\). Each reciprocal pair in (5) becomes \[
+ (1-t+\rho_i t)(1-t+\rho_i^{-1}t)
+ =1+(\rho_i+\rho_i^{-1}-2)t(1-t).
+\] The factor \((1+z)^\varepsilon\) disappears after homogenization. Hence \[
+ \mathcal B(t)=Q(4t(1-t)),\qquad
+ Q(u)=w_0\prod_{i=1}^m(1+\lambda_i u),\qquad
+ \lambda_i=\frac{\rho_i+\rho_i^{-1}-2}{4}\geq0. \tag{6}
+\] Write \(Q(u)=\sum_{j=0}^m q_ju^j\), padding with zeros above its actual degree.
+
+It is essential that \(Q\) is not constant. Differentiating at \(t=0\) gives \[
+ 4Q'(0)=\mathcal B'(0)=n(w_1-w_0). \tag{7}
+\] For the original input, \[
+ \frac{w_1}{w_0}
+ =\left(\sum_{i=1}^n a_i\right)
+  \left(\sum_{i=1}^n a_i^{-1}\right)
+ \geq n^2>1. \tag{8}
+\] The inequality is Cauchy-\/-Schwarz, applied to \(\sqrt{a_i}\) and \(1/\sqrt{a_i}\). Thus \(q_1>0\).
+
+Let \[
+ g(u)=Q'(u),\qquad d=\deg g\leq m-1=r. \tag{9}
+\] By (6), the nonconstant polynomial \(Q\) has only strictly negative real roots. Rolle's theorem, with repeated roots counted with their multiplicities, implies that \(g\) has only strictly negative real roots as well. Explicitly, differentiating a root of multiplicity \(h\) leaves multiplicity \(h-1\), and the intervals between distinct roots supply the remaining roots. Thus for some positive numbers \(b_1,\ldots,b_d\), \[
+ g(u)=g_0\prod_{i=1}^d(1+b_i u),\qquad g_0=q_1>0. \tag{10}
+\] This includes the case \(d=0\), in which \(g\) is a positive constant. No simplicity assumption on \(Q\) or \(g\) is being imposed.
+
+\section{The exact beta-moment factorization}\label{sec:beta}
+\begin{lemma}
+For any real symmetric weights $w_k=w_{n-k}$, define $P_n$ by replacing $f_kf_{n-k}$ in (1) by $w_k$, and let $Q$ be specified by $\mathcal B(t)=Q(4t(1-t))$. The following polynomial identity holds:
+\[
+ P_n(x)=2^nD_n(x)
+ \sum_{j=1}^m j q_j (x)_{j-1}(x+j+\tfrac12)_{m-j}. \tag{11}
+\]
+In particular, its proof does not assume real-rootedness of the weights.
+\end{lemma}
+
+\begin{proof} It is enough to prove the identity for real $x>1$, and then use polynomial equality. Let $T$ have beta density
+\[
+ \frac{t^{x-1}(1-t)^{x-1}}{\mathrm B(x,x)},\qquad 0<t<1,
+\]
+where
+\[
+ \mathrm B(p,q)=\int_0^1t^{p-1}(1-t)^{q-1}\,dt\quad(p,q>0).
+\]
+The elementary beta recurrence, obtained by integration by parts together with $\mathrm B(p,q)=\mathrm B(p+1,q)+\mathrm B(p,q+1)$, gives
+\[
+ \frac{\mathrm B(p+k,q+\ell)}{\mathrm B(p,q)}
+ =\frac{(p)_k(q)_\ell}{(p+q)_{k+\ell}}
+ \quad(k,\ell\geq0).
+\]
+Consequently
+\[
+ \frac1{(2x)_n}\sum_k\binom nk w_k(x)_k(x)_{n-k}
+ =\mathbb E[\mathcal B(T)].
+\]
+Likewise, the beta density with parameters $(x+1,x-1)$ divided by the one with parameters $(x,x)$ is
+\[
+ \frac{x-1}{x}\frac{t}{1-t}.
+\]
+Thus
+\[
+ \frac{P_n(x)}{(2x)_n}
+ =\mathbb E\!\left[\mathcal B(T)
+     \left(1-\frac{x-1}{x}\frac{T}{1-T}\right)\right]. \tag{12}
+\]
+Both the beta law and $\mathcal B$ are invariant under $T\mapsto1-T$. Averaging (12) with its reflected version and putting $U=4T(1-T)$ yields
+\[
+ \frac{P_n(x)}{(2x)_n}
+ =\frac1x\mathbb E\!\left[Q(U)
+          \left(2x-1-\frac{2(x-1)}{U}\right)\right]. \tag{13}
+\]
+All these integrals converge because $x>1$.
+
+For $j\geq0$, let $M_j=\mathbb E[U^j]$. The beta recurrence and the elementary product identity
+\[
+ (2x)_{2j}=4^j(x)_j(x+\tfrac12)_j
+\]
+give
+\[
+ M_j=\frac{4^j(x)_j^2}{(2x)_{2j}}
+    =\frac{(x)_j}{(x+\tfrac12)_j}.
+\]
+The one inverse moment used in (13) is
+\[
+ M_{-1}=\frac{x-\tfrac12}{x-1}.
+\]
+It follows that the constant coefficient $q_0$ contributes zero. For $j\geq1$, direct cancellation gives
+\[
+ (2x-1)M_j-2(x-1)M_{j-1}
+ =\frac{j(x)_{j-1}}{(x+\tfrac12)_j}. \tag{14}
+\]
+For clarity, after extracting $(x)_{j-1}/(x+\tfrac12)_j$, the numerator on the left is
+\[
+ (2x-1)(x+j-1)-2(x-1)(x+j-\tfrac12)=j.
+\]
+Therefore
+\[
+ P_n(x)=\frac{(2x)_n}{x}
+       \sum_{j=1}^m\frac{j q_j(x)_{j-1}}{(x+\tfrac12)_j}. \tag{15}
+\]
+For $n=2m+\varepsilon$, splitting the even and odd factors gives
+\[
+ \frac{(2x)_n}{x}
+ =2^n(x+1)_{m-1+\varepsilon}(x+\tfrac12)_m.
+\]
+Substitution in (15) proves (11) for $x>1$. Both sides of (11) are polynomials, so the identity holds for every complex $x$. In particular, no beta probability distribution or division by a possibly zero factor is used at the negative roots. \end{proof}
+
+With \(g(u)=\sum_{\ell=0}^d g_\ell u^\ell=Q'(u)\), equation (11) takes the particularly useful form \[
+ R_n(x)=\mathcal T_{3/2,r}[g](x),\qquad
+ \mathcal T_{\beta,r}[g](x)
+   :=\sum_{\ell=0}^r g_\ell(x)_\ell(x+\beta+\ell)_{r-\ell}, \tag{16}
+\] where \(g_\ell=0\) above the degree of \(g\).
+
+\section{Real-rootedness and spacing for the transform}\label{sec:spacing}
+\begin{lemma}
+Let $\beta>0$, $r\geq0$, and
+\[
+ g(u)=g_0\prod_{i=1}^d(1+b_i u),\qquad
+ g_0>0,\quad b_i>0,\quad 0\leq d\leq r.
+\]
+Then $\mathcal T_{\beta,r}[g]$ has degree $r$, positive leading coefficient, and only simple negative real roots. Its consecutive roots have distance at least one. When $r=d\geq1$, all of its roots lie in
+\[
+ (-\beta-d+1,0),
+\]
+and their consecutive distances are strictly greater than one.
+\end{lemma}
+
+\begin{proof} First consider $r=d$. Denote $\mathcal T_{\beta,d}[g]$ by $R$. If $g$ is replaced by $(1+bu)g$, direct comparison of coefficients in (16) gives
+\[
+ \mathcal T_{\beta,d+1}[(1+bu)g](x)
+ =(x+\beta+d)R(x)+b xR(x+1). \tag{17}
+\]
+To check this without expansion, the term from $g_\ell$ is multiplied by $x+\beta+d$ in the first summand. In the shifted summand use $x(x+1)_\ell=(x)_{\ell+1}$; this is precisely the term contributed by $b g_\ell u^{\ell+1}$.
+
+For $d=0$, $R=g_0>0$. After multiplying by one factor, the polynomial is $g_0((1+b)x+\beta)$, whose unique root is $-\beta/(1+b)\in(-\beta,0)$.
+
+For the induction step, suppose $d\geq1$ and $R$ has positive leading coefficient and roots
+\[
+ -\beta-d+1<\rho_1<\cdots<\rho_d<0,
+ \qquad \rho_{i+1}-\rho_i>1.
+\]
+Let
+\[
+ S(x)=(x+\beta+d)R(x)+b xR(x+1),\qquad b>0.
+\]
+Its leading coefficient is $(1+b)$ times that of $R$, so its degree is $d+1$. At $\rho_i$, the point $\rho_i+1$ lies strictly after $\rho_i$ and strictly before the next root when there is one. Since $\rho_i<0$,
+\[
+ \operatorname{sgn}S(\rho_i)=(-1)^{d-i+1}. \tag{18}
+\]
+At $\rho_i-1$, the shifted summand vanishes and $\rho_i+\beta+d-1>0$. The gap condition places $\rho_i-1$ strictly between the previous root and $\rho_i$ when there is a previous root. Hence
+\[
+ \operatorname{sgn}S(\rho_i-1)=(-1)^{d-i+1}. \tag{19}
+\]
+Finally,
+\[
+ \operatorname{sgn}S(-\beta-d)=(-1)^{d+1},\qquad S(0)>0. \tag{20}
+\]
+For the first equality, the first summand vanishes, while $-\beta-d+1<\rho_1$ and $b(-\beta-d)<0$.
+
+The signs (18)--(20) give a sign change in each of the $d+1$ nonempty disjoint intervals
+\[
+ (-\beta-d,\rho_1-1),\qquad
+ (\rho_i,\rho_{i+1}-1)\ (1\leq i<d),\qquad
+ (\rho_d,0). \tag{21}
+\]
+The intermediate value theorem gives at least one root in every interval. Degree $d+1$ implies that these are exactly all the roots and that they are simple. If they are denoted by $\sigma_1<\cdots<\sigma_{d+1}$, then
+\[
+ \sigma_i<\rho_i-1<\rho_i<\sigma_{i+1},
+\]
+so their consecutive gaps exceed one. The lower bound in (21) is exactly the asserted lower bound for degree $d+1$. This completes the induction. The parameters $b_i$ need not be distinct.
+
+For $r>d$, factor the common trailing rising factorial in (16):
+\[
+ \mathcal T_{\beta,r}[g](x)
+ =(x+\beta+d)_{r-d}\,\mathcal T_{\beta,d}[g](x). \tag{22}
+\]
+The extra roots are
+\[
+ -\beta-d,-\beta-d-1,\ldots,-\beta-r+1.
+\]
+They are simple, spaced exactly one apart, and lie more than one to the left of the smallest root of the degree-$d$ factor when $d\geq1$. If $d=0$, that factor is a positive constant. Thus in every case all roots are simple and negative, and consecutive gaps are at least one. The full root set is contained in $[-\beta-r+1,0)$ when $r\geq1$. \end{proof}
+
+\section{Completion of the proof}\label{sec:completion}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+
+Sections 1--2 construct $g=Q'$ of the form (10) for every input in the problem. Equation (11) gives (2), with residual factor (16). The lemma in Section 4 applies with $\beta=3/2$ and $r=m-1$. Thus every zero of $R_n$ is strictly negative and real, and the residual is nonzero of degree $r$. The factor $D_n$ has only the negative integer zeros explicitly displayed in the theorem. Its degree is $m-1+\varepsilon$, so
+\[
+ \deg P_n=(m-1+\varepsilon)+(m-1)=n-2.
+\]
+For an additional nonvanishing check, every summand in (16) has leading coefficient $g_\ell$, so the leading coefficient of $R_n$ is $g(1)>0$. Its constant term is
+\[
+ R_n(0)=g_0(\tfrac32)_r>0.
+\]
+These facts also rule out a zero polynomial or a root at the origin. The conclusion is exactly the target for all of its parameters. \end{proof}
+
+\section{A linear-weight consequence and boundary cases}
+
+The same argument proves the following sufficient condition not restricted to weights of the form \(f_kf_{n-k}\).
+
+\begin{corollary}
+Suppose $w_0,\ldots,w_n>0$ are symmetric, $n\geq3$, and $W(z)=\sum_{k=0}^n w_kz^k$ has only negative real roots. Then the linear weight transform defined by (1), with $f_kf_{n-k}$ replaced by $w_k$, has the same factorization and negative-root conclusion.
+\end{corollary}
+
+\begin{proof}Indeed, the second application of the coefficient-convolution lemma supplies the required real-rootedness of $V$. To check the only remaining strictness condition, write $W(z)=w_0\prod_{i=1}^n(1+\alpha_i z)$ with $\alpha_i>0$. Symmetry gives $\prod_i\alpha_i=w_n/w_0=1$, so $w_1/w_0=\sum_i\alpha_i\geq n>1$ by the arithmetic-geometric mean inequality. Equation (7) again gives $Q'(0)>0$. Everything else in the proof is unchanged.
+
+\end{proof}
+
+\subsection*{Boundary cases and scaling}
+
+For \(n=3\) the construction reduces to the direct identity \[
+ P_3(x)=6(f_1f_2-f_0f_3)(x+1),
+\] whose nonconstant factor has root \(-1\). For \(n=4\) it gives \[
+ P_4(x)=12(x+1)
+ \big[(f_2^2-f_0f_4)x+2(f_1f_3-f_0f_4)\big].
+\] For \(F(t)=(1+t)^n\), these specialize to \(P_3=48(x+1)\) and \(P_4=60(x+1)(7x+6)\). Repeated parameters cause no problem at any degree, as is explicit in the proof.
+
+Scaling \(c\) multiplies \(P_n\) by its square scaling factor. Scaling all \(a_i\) by \(s>0\) multiplies \(P_n\) by \(s^n\), so neither operation changes the roots. Allowing \(s=0\) would instead give a zero polynomial; this is outside the stated positive full-support domain. Inputs with zero coefficients, or degrees below the declared \(n\), are not being included by a limiting argument. For perspective, the transforms at declared degrees \(0\) and \(1\) are identically zero, while at degree \(2\) the full-support input gives the positive constant \(2(f_1^2-f_0f_2)\). None is a counterexample to the \(n\geq3\) target.
+
+\section{Exact finite records and reproducibility}
+
+The accompanying verifier reconstructs the original transform coefficient by coefficient using exact rational arithmetic. It computes \(Q\) by a triangular change of basis, checks the factorization, and uses square-free factorization and exact Sturm counts with multiplicities restored. Constants have an empty root count. Its negative-root and square-freeness checks do not themselves certify the mesh or location bounds; those properties are proved above.
+
+The saved report contains 168 archived inputs, twelve at each degree \(n=3,\ldots,16\), and 38 further exact positive-parameter examples. The latter use four deterministic families at \(n=3,4,5,6,8,9,12,16,20\), and equal-parameter inputs at \(n=24,32\). It also records 437 symmetric-weight basis-vector factorization checks for \(n=3,\ldots,40\), the generic recurrence for \(d=0,\ldots,8\), and 144 degree-padding examples. The low-degree helper covers \(n=3,\ldots,7\). All rational inputs and polynomial coefficient arrays are provided with the code.
+
+These are delivered historical records, not fresh executions performed while preparing this manuscript. The complete verification suite was not rerun for this edition. Finite exact tests are diagnostics and reproducibility material; they do not establish the theorem for arbitrary positive real parameters. The written proof supplies that conclusion. Reproduction instructions specify Python 3.10 or later with SymPy 1.14.0 and assertions enabled.
+
+\paragraph{AI assistance.}
+
+This work was prepared with AI assistance. No independent human peer-review, proof-assistant certification, or worldwide-priority claim is made.
+
+\begin{thebibliography}{9}
+\bibitem{Karp2012}
+D.~Karp, \emph{Positivity of Toeplitz determinants formed by rising factorial
+series and properties of related polynomials}, arXiv:1203.1482v1 (2012).
+Conjecture~3, PDF p.~2; equation~(7) and Theorem~1, PDF p.~4.
+\url{https://arxiv.org/abs/1203.1482v1}.
+
+\bibitem{Kryvonos2023}
+L.~Kryvonos, \emph{Open problems on polynomials, their zero distribution and
+related questions: 2023}, arXiv:2312.07754v1 (2023).
+Dmitrii Karp's contribution, ``Toeplitz determinants of Pochhammers,''
+Conjecture~1, PDF p.~3.
+\url{https://arxiv.org/abs/2312.07754v1}.
+\end{thebibliography}
+\end{document}
